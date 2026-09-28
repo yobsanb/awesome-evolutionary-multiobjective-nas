@@ -8,7 +8,7 @@ Papers, code, benchmarks, and deployment guidance for evolutionary multiobjectiv
 
 Evolutionary multiobjective neural architecture search (**EMONAS**) uses evolutionary or related population-based methods to approximate a **Pareto set** of architectures under explicit objectives and constraints. It balances predictive performance with model complexity, latency, energy, memory, and, increasingly, robustness and lifecycle impact. The resulting trade-offs depend on the task, target device, software stack, and operating conditions.
 
-This collection accompanies the survey *Evolutionary Multiobjective Neural Architecture Search: Taxonomy, Benchmarks, Deployment-Driven Design, and Emerging Directions*. Its taxonomy has five interacting components: **search space, search strategy, objective functions, evaluation strategy, and speed-up techniques**. Hardware awareness spans all five.
+This collection used for the survey *Evolutionary Multiobjective Neural Architecture Search: Taxonomy, Benchmarks, Deployment-Driven Design, and Emerging Directions*. Its taxonomy has five interacting components: **search space, search strategy, objective functions, evaluation strategy, and speed-up techniques**. Hardware awareness spans all five.
 
 ## Contents
 
