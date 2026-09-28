@@ -1,14 +1,42 @@
-# Awesome Evolutionary Multiobjective Neural Architecture Search (Updated through 2026)
+# Awesome Evolutionary Multiobjective Neural Architecture Search
+
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-> ## A list of papers and code for evolutionary multiobjective neural architecture search :tada:
-> **Last updated:** September 2026
->
-> **Author:** [Yobsan Bayisa Leta](https://github.com/yobsanb)
+Papers, code, benchmarks, and deployment guidance for evolutionary multiobjective neural architecture search.
 
-Evolutionary multiobjective neural architecture search (**EMONAS**) uses population-based search to design neural networks that balance **accuracy** against **latency, energy, memory, and model size**. Instead of a single model, it returns a **Pareto set** of architectures, so one search can serve devices from the cloud to microcontrollers.
+**Maintainer:** [Yobsan Bayisa Leta](https://github.com/yobsanb)
 
-This list accompanies the survey *Evolutionary Multiobjective Neural Architecture Search: Taxonomy, Benchmarks, Deployment Driven Design, and Emerging Directions* (Artificial Intelligence Review). Papers are grouped by the taxonomy below: search space, search strategy, objective functions, speed-up techniques, and hardware awareness, followed by applications.
+Evolutionary multiobjective neural architecture search (**EMONAS**) uses evolutionary or related population-based methods to approximate a **Pareto set** of architectures under explicit objectives and constraints. It balances predictive performance with model complexity, latency, energy, memory, and, increasingly, robustness and lifecycle impact. The resulting trade-offs depend on the task, target device, software stack, and operating conditions.
+
+This collection accompanies the survey *Evolutionary Multiobjective Neural Architecture Search: Taxonomy, Benchmarks, Deployment-Driven Design, and Emerging Directions*. Its taxonomy has five interacting components: **search space, search strategy, objective functions, evaluation strategy, and speed-up techniques**. Hardware awareness spans all five.
+
+## Contents
+
+- [Scope](#scope)
+- [Surveys](#surveys)
+- [Benchmarks](#benchmarks)
+- [Search Space](#search-space)
+- [Search Strategy](#search-strategy)
+- [Objective Functions](#objective-functions)
+- [Evaluation Strategy](#evaluation-strategy)
+- [Speed-Up Techniques](#speed-up-techniques)
+- [Hardware-Aware NAS](#hardware-aware-nas)
+- [Applications](#applications)
+- [Emerging Directions](#emerging-directions)
+- [Analysis and Tools](#analysis-and-tools)
+- [Minimum Reporting Checklist](#minimum-reporting-checklist)
+
+## Scope
+
+The survey distinguishes three roles for the literature:
+
+| Role | Inclusion criteria | Examples |
+|---|---|---|
+| Explicit EMONAS (D1) | Evolutionary or related population-based architecture search with at least two objectives and an explicit multiobjective mechanism, such as dominance, decomposition, or indicator-based selection. | NSGA-Net, LEMONADE, NSGANetV2, SiamNAS |
+| Other evolutionary NAS (D2) | Evolutionary architecture search contributing representations, operators, evaluation methods, or deployment techniques without meeting the D1 criteria. | AmoebaNet, Genetic CNN, NPENAS |
+| Supporting literature (S1-S5) | Adjacent NAS methods, benchmarks, optimization foundations, surveys, and deployment background. | DARTS, EvoXBench, NSGA-II, hardware cost models |
+
+Reporting several metrics, using a fixed weighted score, or optimizing one objective under resource constraints is insufficient for D1 classification. The thematic lists include all three roles; classification of a paper depends on its search mechanism and objective formulation. A dash in the Code column means no implementation is linked here; unofficial implementations are marked.
 
 [![Taxonomy of evolutionary multiobjective neural architecture search](taxonomy.png)](taxonomy.pdf)
 
@@ -44,6 +72,10 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 
 ## Benchmarks
 
+Benchmarks support different kinds of evidence: NAS-Bench-101/201 and NATS-Bench enable reproducible architecture queries; BenchENAS standardizes evolutionary NAS experiments; EvoXBench provides multiobjective test problems; HW-NAS-Bench and HW-GPT-Bench expose device costs; cross-task suites test transfer beyond classification.
+
+Compare methods under matched search spaces, datasets, training protocols, evaluation regimes, and budgets. GPU days from full training, supernet evaluation, surrogate queries, and tabular lookup measure different work. Hypervolume comparisons also require the same objectives, normalization, and reference point. Benchmark results require validation on the intended deployment target.
+
 | Paper | Code |
 |---|---|
 | [A Multi-objective Optimization Benchmark Test Suite for Real-time Semantic Segmentation (2024)](https://arxiv.org/abs/2404.16266) | [EMI-Group/evoxbench](https://github.com/EMI-Group/evoxbench) |
@@ -73,6 +105,8 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 
 ## Search Space
 
+Search spaces combine **granularity** (micro/cell, macro, or mixed), **parameter domains** (discrete, continuous, or hybrid), and **structural composition** (modular, nonmodular, or partially modular). Graph, string, and adjacency-matrix encodings determine which variation operators are valid and how well structural changes preserve behavior. Hardware-oriented spaces expose relevant operator, width, depth, and precision choices.
+
 | Paper | Code |
 |---|---|
 | [A Continuous Encoding-Based Representation for Efficient Multi-Fidelity Multi-Objective Neural Architecture Search (2025)](https://arxiv.org/abs/2509.01943) | - |
@@ -85,6 +119,8 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [Hierarchical Representations for Efficient Architecture Search (2018)](https://arxiv.org/abs/1711.00436) | - |
 
 ## Search Strategy
+
+Variation generates architectures; multiobjective selection decides which survive. Genetic algorithms, genetic programming, evolution strategies, swarm methods, and evolutionary-gradient hybrids can be paired with dominance-, decomposition-, or indicator-based selection. Population and archive design should preserve both Pareto-front coverage and structural diversity. These lists include explicit EMONAS methods and other evolutionary NAS foundations.
 
 ### Evolutionary algorithms
 
@@ -137,40 +173,9 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [EG-NAS: Neural Architecture Search with Fast Evolutionary Exploration (2024)](https://doi.org/10.1609/aaai.v38i10.28993) | [caicaicheng/EG-NAS](https://github.com/caicaicheng/EG-NAS) |
 | [EST-NAS: An Evolutionary Strategy with Gradient Descent for Neural Architecture Search (2023)](https://doi.org/10.1016/j.asoc.2023.110624) | - |
 
-### LLM-guided and generative search
+### Multiobjective selection and optimization foundations
 
-| Paper | Code |
-|---|---|
-| [Dual-role LLMs for evolutionary neural architecture search: Evolutionary generation and comparative prediction (2026)](https://doi.org/10.1016/j.eswa.2026.133020) | - |
-| [Large language model assisted evolutionary neural architecture search with population knowledge base enhancement (2026)](https://doi.org/10.1016/j.ins.2026.123110) | - |
-| [LLM-NAS: LLM-driven Hardware-Aware Neural Architecture Search (2026)](https://arxiv.org/abs/2510.01472) | - |
-| [LLMENAS: Evolutionary Neural Architecture Search via Large Language Model Guidance (2026)](https://doi.org/10.1109/TEVC.2026.3670336) | [LLMENAS/LLMENAS](https://github.com/LLMENAS/LLMENAS) |
-| [RZ-NAS: Enhancing LLM-guided Neural Architecture Search via Reflective Zero-Cost Strategy (2025)](https://proceedings.mlr.press/v267/ji25a.html) | [PasaLab/RZ-NAS](https://github.com/PasaLab/RZ-NAS) |
-| [SEKI: Self-Evolution and Knowledge Inspiration based Neural Architecture Search via Large Language Models (2025)](https://arxiv.org/abs/2502.20422) | - |
-| [DiffusionNAG: Predictor-guided Neural Architecture Generation with Diffusion Models (2024)](https://arxiv.org/abs/2305.16943) | [CownowAn/DiffusionNAG](https://github.com/CownowAn/DiffusionNAG) |
-| [Evolution of Heuristics: Towards Efficient Automatic Algorithm Design Using Large Language Model (2024)](https://arxiv.org/abs/2401.02051) | [FeiLiu36/EoH](https://github.com/FeiLiu36/EoH) |
-| [Evolution Through Large Models (2024)](https://arxiv.org/abs/2206.08896) | - |
-| [LeMo-NADe: Multi-Parameter Neural Architecture Discovery with LLMs (2024)](https://arxiv.org/abs/2402.18443) | - |
-| [LLMatic: Neural Architecture Search via Large Language Models and Quality-Diversity Optimization (2024)](https://doi.org/10.1145/3638529.3654017) | [umair-nasir14/LLMatic](https://github.com/umair-nasir14/LLMatic) |
-| [Mathematical discoveries from program search with large language models (2024)](https://doi.org/10.1038/s41586-023-06924-6) | [google-deepmind/funsearch](https://github.com/google-deepmind/funsearch) |
-| [Can GPT-4 Perform Neural Architecture Search? (2023)](https://arxiv.org/abs/2304.10970) | [mingkai-zheng/GENIUS](https://github.com/mingkai-zheng/GENIUS) |
-| [EvoPrompting: Language Models for Code-Level Neural Architecture Search (2023)](https://arxiv.org/abs/2302.14838) | - |
-
-### Reinforcement learning, differentiable and Bayesian search
-
-| Paper | Code |
-|---|---|
-| [Multi-objective Differentiable Neural Architecture Search (2024)](https://arxiv.org/abs/2402.18213) | [automl/MODNAS](https://github.com/automl/MODNAS) |
-| [Pareto-Informed Multi-objective Neural Architecture Search (2024)](https://doi.org/10.1007/978-3-031-70071-2_23) | - |
-| [BlockQNN: Efficient Block-Wise Neural Network Architecture Generation (2020)](https://arxiv.org/abs/1808.05584) | - |
-| [InstaNAS: Instance-aware Neural Architecture Search (2020)](https://arxiv.org/abs/1811.10201) | [AnjieCheng/InstaNAS](https://github.com/AnjieCheng/InstaNAS) |
-| [Understanding and Robustifying Differentiable Architecture Search (2020)](https://arxiv.org/abs/1909.09656) | [automl/RobustDARTS](https://github.com/automl/RobustDARTS) |
-| [DARTS: Differentiable Architecture Search (2019)](https://arxiv.org/abs/1806.09055) | [quark0/darts](https://github.com/quark0/darts) |
-| [Searching for A Robust Neural Architecture in Four GPU Hours (2019)](https://arxiv.org/abs/1910.04465) | [D-X-Y/AutoDL-Projects](https://github.com/D-X-Y/AutoDL-Projects) |
-| [Learning Transferable Architectures for Scalable Image Recognition (2018)](https://arxiv.org/abs/1707.07012) | [tensorflow/models](https://github.com/tensorflow/models/tree/master/research/slim/nets/nasnet) |
-| [Neural Architecture Search with Reinforcement Learning (2017)](https://arxiv.org/abs/1611.01578) | - |
-
-### Multiobjective evolutionary algorithms
+NSGA-II and SPEA2 use dominance-based selection; NSGA-III adds reference points for many objectives; MOEA/D uses decomposition; IBEA, SMS-EMOA, and HypE use indicators. The references also cover preferences, constraints, dynamic objectives, and related optimization tools. Selection pressure and decision-space diversity require particular attention as the objective count grows.
 
 | Paper | Code |
 |---|---|
@@ -199,7 +204,25 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [A Fast and Elitist Multiobjective Genetic Algorithm: NSGA-II (2002)](https://doi.org/10.1109/4235.996017) | - |
 | [SPEA2: Improving the Strength Pareto Evolutionary Algorithm (2001)](https://doi.org/10.3929/ethz-a-004284029) | - |
 
+### Reinforcement learning, differentiable and Bayesian search
+
+Adjacent NAS methods provide baselines and reusable search spaces. Their multiobjective variants belong to the broader NAS literature; an evolutionary component must perform architecture selection to meet the survey's evolutionary scope.
+
+| Paper | Code |
+|---|---|
+| [Multi-objective Differentiable Neural Architecture Search (2024)](https://arxiv.org/abs/2402.18213) | [automl/MODNAS](https://github.com/automl/MODNAS) |
+| [Pareto-Informed Multi-objective Neural Architecture Search (2024)](https://doi.org/10.1007/978-3-031-70071-2_23) | - |
+| [BlockQNN: Efficient Block-Wise Neural Network Architecture Generation (2020)](https://arxiv.org/abs/1808.05584) | - |
+| [InstaNAS: Instance-aware Neural Architecture Search (2020)](https://arxiv.org/abs/1811.10201) | [AnjieCheng/InstaNAS](https://github.com/AnjieCheng/InstaNAS) |
+| [Understanding and Robustifying Differentiable Architecture Search (2020)](https://arxiv.org/abs/1909.09656) | [automl/RobustDARTS](https://github.com/automl/RobustDARTS) |
+| [DARTS: Differentiable Architecture Search (2019)](https://arxiv.org/abs/1806.09055) | [quark0/darts](https://github.com/quark0/darts) |
+| [Searching for A Robust Neural Architecture in Four GPU Hours (2019)](https://arxiv.org/abs/1910.04465) | [D-X-Y/AutoDL-Projects](https://github.com/D-X-Y/AutoDL-Projects) |
+| [Learning Transferable Architectures for Scalable Image Recognition (2018)](https://arxiv.org/abs/1707.07012) | [tensorflow/models](https://github.com/tensorflow/models/tree/master/research/slim/nets/nasnet) |
+| [Neural Architecture Search with Reinforcement Learning (2017)](https://arxiv.org/abs/1611.01578) | - |
+
 ## Objective Functions
+
+Predictive objectives include accuracy or error, mAP, mIoU, and perplexity. Efficiency objectives distinguish hardware-independent complexity (parameters and FLOPs) from device-dependent latency, energy, and memory. Hard requirements, such as peak-memory limits or latency deadlines, define feasibility. FLOPs and parameter count alone cannot establish deployment efficiency.
 
 ### Adversarial robustness
 
@@ -215,12 +238,16 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 
 ### Fairness
 
+State the fairness metric, protected attributes, subgroup aggregation, and uncertainty. Evidence for explicit fairness-aware EMONAS and reliable low-cost fairness estimators remains limited.
+
 | Paper | Code |
 |---|---|
 | [Data-Algorithm-Architecture Co-Optimization for Fair Neural Networks on Skin Lesion Dataset (2024)](https://doi.org/10.1007/978-3-031-72117-5_15) | - |
 | [Rethinking Bias Mitigation: Fairer Architectures Make for Fairer Face Recognition (2023)](https://arxiv.org/abs/2210.09943) | [dooleys/FR-NAS](https://github.com/dooleys/FR-NAS) |
 
 ### Energy, carbon and Green AI
+
+Distinguish measured and estimated energy, search cost, final training cost, and inference cost over the deployment lifetime. Carbon estimates additionally depend on the electricity mix and timing of computation.
 
 | Paper | Code |
 |---|---|
@@ -230,7 +257,36 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [Green AI (2020)](https://doi.org/10.1145/3381831) | - |
 | [Energy and Policy Considerations for Deep Learning in NLP (2019)](https://doi.org/10.18653/v1/P19-1355) | - |
 
+### Privacy, preferences and changing contexts
+
+Privacy-aware federated NAS provides an emerging setting for joint architecture and privacy objectives; explicit evolutionary multiobjective evidence remains limited. See [Federated NAS](#federated-nas) for related methods.
+
+Reference points, resource constraints, and knee solutions help focus search on relevant trade-offs. Device, compiler, precision, thermal state, and workload changes can alter architecture rankings, motivating context-specific Pareto fronts and reevaluation under changing conditions.
+
+## Evaluation Strategy
+
+Evaluation determines the objective values used for selection. **Full training and direct on-device measurement are the reference evaluations** against which cheaper estimates are judged. Validate final Pareto candidates at the intended fidelity, with the training configuration, device, compiler/runtime, precision, batch size, warm-up, and measurement conditions documented. Repeat hardware measurements and report dispersion.
+
+| Evaluation route | What it supplies | Main limitation |
+|---|---|---|
+| Full training and device measurement | Reference predictive performance and hardware costs | Expensive; results depend on the protocol and target |
+| Proxies, short training, or learning-curve extrapolation | Approximate predictive performance | Ranking bias, including missed late improvements |
+| Supernet weights or inherited parent weights | Performance under shared or warm-started weights | May differ from standalone training |
+| Learned surrogates | Predicted performance, rank, or dominance | Errors near the Pareto front can change selection |
+| Hardware lookup tables or predictors | Estimated device-specific latency, energy, or memory | Require calibration; may miss whole-network interactions |
+
+Estimators have a dual role: they set the values entering selection and reduce evaluation cost. Hardware-in-the-loop measurement accelerates a pipeline when a measured subset calibrates cheaper estimators. See [evaluation accelerators](#zero-cost-proxies-and-training-free-evaluation) and [hardware cost estimation](#hardware-cost-estimation).
+
 ## Speed-Up Techniques
+
+Acceleration operates across the taxonomy:
+
+- **Search space:** cell reuse, restricted operator sets, pruning, and learned partitions reduce the region explored.
+- **Search strategy:** parallel evaluation, asynchronous evolution, and staged search improve budget use.
+- **Objectives and contexts:** preference-focused evaluation and knowledge transfer reduce repeated search for related requirements.
+- **Evaluation:** proxies, low-fidelity training, supernets, surrogates, weight inheritance, and hardware estimators reduce candidate cost.
+
+Multistage pipelines screen broadly with cheap estimates and reserve expensive evaluation for promising candidates. Their value depends on preserving useful architectures through each filtering stage.
 
 ### Zero-cost proxies and training-free evaluation
 
@@ -327,6 +383,12 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 
 ## Hardware-Aware NAS
 
+Hardware awareness affects the search space, objectives, evaluation, and computational budget. Distinguish optimizing for a fixed device from jointly searching architecture, quantization, and hardware configuration. Whole-network latency and energy measurements capture effects that arithmetic proxies and additive operator costs can miss, including memory traffic, scheduling, and compiler fusion.
+
+### From benchmarks to deployment
+
+Deployment evidence should address transfer across tasks and devices, predictor reliability near the Pareto front, compiler and operator support, and the cost of retraining or reoptimization. An architecture selected on one device can become dominated on another. Hardware utilization, bandwidth, and arithmetic intensity can help explain these changes alongside measured latency and energy.
+
 ### Hardware cost estimation
 
 | Paper | Code |
@@ -379,6 +441,8 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [Roofline: An Insightful Visual Performance Model for Multicore Architectures (2009)](https://doi.org/10.1145/1498765.1498785) | - |
 
 ## Applications
+
+The lists combine direct EMONAS applications with adjacent NAS evidence. Visual recognition has the broadest evidence; medical segmentation, spiking networks, microcontrollers, and edge accelerators provide further explicit multiobjective examples. Language, speech, federated systems, and industrial sensing include related studies that define tasks or constraints without necessarily satisfying D1. Application accuracy alone does not establish robustness or deployment readiness.
 
 ### Detection, segmentation and image restoration
 
@@ -469,6 +533,40 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [Neural Architecture Search and Multi-Objective Evolutionary Algorithms for Anomaly Detection (2021)](https://doi.org/10.1109/ICDMW53433.2021.00130) | - |
 | [Emotion estimation by joint facial expression and speech tonality using evolutionary deep learning structures (2019)](https://scholar.google.com/scholar_lookup?title=Emotion%20estimation%20by%20joint%20facial%20expression%20and%20speech%20tonality%20using%20evolutionary%20deep%20learning%20structures) | - |
 
+## Emerging Directions
+
+The survey identifies six research priorities:
+
+| Direction | Research focus |
+|---|---|
+| Landscape-aware variation and selection | Measure representation locality and preserve structural diversity alongside Pareto coverage. |
+| Evolutionary-gradient hybrids | Allocate variables and budgets between global evolution and local refinement without collapsing diversity. |
+| Reliable performance estimation | Validate rankings near the Pareto front, calibrate uncertainty, and test transfer across tasks and devices. |
+| Open-ended search spaces | Distinguish variable-length architectures from expanding the operator vocabulary; evaluate new components reproducibly. |
+| Lifecycle-aware hardware and software co-design | Jointly optimize network and hardware choices while accounting for search, training, and deployment costs. |
+| Generative and foundation-model-assisted search | Use generators for proposals, repair, or transfer, and measure proposal quality, diversity, reproducibility, and total cost. |
+
+### LLM-guided and generative search
+
+This group includes evolutionary NAS, adjacent generative NAS, and general program or heuristic search. Most reviewed LLM-assisted NAS studies optimize a single objective. LLM-NAS and the [UH-NAS preprint](https://arxiv.org/abs/2606.10294) illustrate explicit multiobjective extensions; standardized, reproducible EMONAS frameworks remain an emerging direction.
+
+| Paper | Code |
+|---|---|
+| [Dual-role LLMs for evolutionary neural architecture search: Evolutionary generation and comparative prediction (2026)](https://doi.org/10.1016/j.eswa.2026.133020) | - |
+| [Large language model assisted evolutionary neural architecture search with population knowledge base enhancement (2026)](https://doi.org/10.1016/j.ins.2026.123110) | - |
+| [LLM-NAS: LLM-driven Hardware-Aware Neural Architecture Search (2026)](https://arxiv.org/abs/2510.01472) | - |
+| [LLMENAS: Evolutionary Neural Architecture Search via Large Language Model Guidance (2026)](https://doi.org/10.1109/TEVC.2026.3670336) | [LLMENAS/LLMENAS](https://github.com/LLMENAS/LLMENAS) |
+| [RZ-NAS: Enhancing LLM-guided Neural Architecture Search via Reflective Zero-Cost Strategy (2025)](https://proceedings.mlr.press/v267/ji25a.html) | [PasaLab/RZ-NAS](https://github.com/PasaLab/RZ-NAS) |
+| [SEKI: Self-Evolution and Knowledge Inspiration based Neural Architecture Search via Large Language Models (2025)](https://arxiv.org/abs/2502.20422) | - |
+| [DiffusionNAG: Predictor-guided Neural Architecture Generation with Diffusion Models (2024)](https://arxiv.org/abs/2305.16943) | [CownowAn/DiffusionNAG](https://github.com/CownowAn/DiffusionNAG) |
+| [Evolution of Heuristics: Towards Efficient Automatic Algorithm Design Using Large Language Model (2024)](https://arxiv.org/abs/2401.02051) | [FeiLiu36/EoH](https://github.com/FeiLiu36/EoH) |
+| [Evolution Through Large Models (2024)](https://arxiv.org/abs/2206.08896) | - |
+| [LeMo-NADe: Multi-Parameter Neural Architecture Discovery with LLMs (2024)](https://arxiv.org/abs/2402.18443) | - |
+| [LLMatic: Neural Architecture Search via Large Language Models and Quality-Diversity Optimization (2024)](https://doi.org/10.1145/3638529.3654017) | [umair-nasir14/LLMatic](https://github.com/umair-nasir14/LLMatic) |
+| [Mathematical discoveries from program search with large language models (2024)](https://doi.org/10.1038/s41586-023-06924-6) | [google-deepmind/funsearch](https://github.com/google-deepmind/funsearch) |
+| [Can GPT-4 Perform Neural Architecture Search? (2023)](https://arxiv.org/abs/2304.10970) | [mingkai-zheng/GENIUS](https://github.com/mingkai-zheng/GENIUS) |
+| [EvoPrompting: Language Models for Code-Level Neural Architecture Search (2023)](https://arxiv.org/abs/2302.14838) | - |
+
 ## Analysis and Tools
 
 | Paper | Code |
@@ -481,6 +579,17 @@ This list accompanies the survey *Evolutionary Multiobjective Neural Architectur
 | [ModularNAS: Towards Modularized and Reusable Neural Architecture Search (2021)](https://proceedings.mlsys.org/paper_files/paper/2021/hash/bc19061f88f16e9ed4a18f0bbd47048a-Abstract.html) | [CreeperLin/modnas](https://github.com/CreeperLin/modnas) |
 | [PlatEMO: A MATLAB Platform for Evolutionary Multi-Objective Optimization (2017)](https://doi.org/10.1109/MCI.2017.2742868) | [BIMK/PlatEMO](https://github.com/BIMK/PlatEMO) |
 
----
+## Minimum Reporting Checklist
 
-> ## Feel free to show your :heart: by giving a star :star:
+Adapted from the survey's Table 11. These criteria complement matched search spaces, budgets, and evaluation protocols.
+
+| Criterion | What to report |
+|---|---|
+| Surrogate reliability | Overall Kendall's tau plus nDCG or rank accuracy among the top 1% or fewer candidates, with the subset defined explicitly. |
+| Selection effectiveness | Fraction of mutually nondominated solutions in the final population, especially for many-objective search. |
+| Decision-space diversity | Coverage of architecture descriptors such as depth, width, and operator mix; locality or invalid-offspring rates when evaluating variation operators. |
+| Lifecycle cost | Search, final training, and lifetime inference energy; break-even deployment count; token use, dated costs, and cost assumptions for LLM-assisted search. |
+| Statistical reliability | At least three independent seeds, dispersion, released code, seeds, and complete configurations. |
+| Hardware sensitivity | Latency and energy on at least two devices, or evaluation with a shared hardware benchmark such as HW-NAS-Bench; measurement scope should match deployment claims. |
+
+For generative search, also report the model version, prompts or conditioning procedure, inference settings, evaluation date, proposal count, invalid-proposal rate, and comparison with a conventional evolutionary baseline.
