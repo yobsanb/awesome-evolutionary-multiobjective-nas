@@ -24,19 +24,20 @@ This collection accompanies the survey *Evolutionary Multiobjective Neural Archi
 - [Applications](#applications)
 - [Emerging Directions](#emerging-directions)
 - [Analysis and Tools](#analysis-and-tools)
+- [Supporting Resources](#supporting-resources)
 - [Minimum Reporting Checklist](#minimum-reporting-checklist)
 
 ## Scope
 
-The survey distinguishes three roles for the literature:
+The collection covers 319 sources across three roles:
 
 | Role | Inclusion criteria | Examples |
 |---|---|---|
-| Explicit EMONAS (D1) | Evolutionary or related population-based architecture search with at least two objectives and an explicit multiobjective mechanism, such as dominance, decomposition, or indicator-based selection. | NSGA-Net, LEMONADE, NSGANetV2, SiamNAS |
-| Other evolutionary NAS (D2) | Evolutionary architecture search contributing representations, operators, evaluation methods, or deployment techniques without meeting the D1 criteria. | AmoebaNet, Genetic CNN, NPENAS |
-| Supporting literature (S1-S5) | Adjacent NAS methods, benchmarks, optimization foundations, surveys, and deployment background. | DARTS, EvoXBench, NSGA-II, hardware cost models |
+| Explicit EMONAS | Evolutionary or related population-based architecture search with at least two objectives and an explicit multiobjective mechanism, such as dominance, decomposition, or indicator-based selection. | NSGA-Net, LEMONADE, NSGANetV2, SiamNAS |
+| Other evolutionary NAS | Related evolutionary architecture search contributing representations, operators, evaluation methods, or deployment techniques. | AmoebaNet, Genetic CNN, NPENAS |
+| Supporting literature | Adjacent NAS methods, benchmarks, optimization foundations, surveys, and deployment background. | DARTS, EvoXBench, NSGA-II, hardware cost models |
 
-Reporting several metrics, using a fixed weighted score, or optimizing one objective under resource constraints is insufficient for D1 classification. The thematic lists include all three roles; classification of a paper depends on its search mechanism and objective formulation. A dash in the Code column means no implementation is linked here; unofficial implementations are marked.
+Reporting several metrics, using a fixed weighted score, or optimizing one objective under resource constraints does not by itself establish an explicit multiobjective search. The thematic lists include all three roles, distinguished by their search mechanisms and objective formulations. A dash in the Code column means no implementation is linked here; unofficial implementations are marked.
 
 [![Taxonomy of evolutionary multiobjective neural architecture search](taxonomy.png)](taxonomy.pdf)
 
@@ -400,7 +401,7 @@ Deployment evidence should address transfer across tasks and devices, predictor 
 
 | Paper | Code |
 |---|---|
-| [MARCO: Hardware-Aware Neural Architecture Search for Edge Devices with Multi-Agent Reinforcement Learning and Conformal Prediction Filtering (2026)](https://arxiv.org/abs/2506.13755) | - |
+| [MARCO: Hardware-Aware Neural Architecture Search for Edge Devices with Multi-Agent Reinforcement Learning and Conformal Filtering (2026)](https://doi.org/10.1109/ASP-DAC66049.2026.11420542) | - |
 | [Hardware-Aware Neural Architecture Search of Early Exiting Networks on Edge Accelerators (2025)](https://arxiv.org/abs/2512.04705) | - |
 | [RAM-NAS: Resource-Aware Multiobjective Neural Architecture Search Method for Robot Vision Tasks (2025)](https://arxiv.org/abs/2509.20688) | - |
 | [DeepMaker: A Multi-Objective Optimization Framework for Deep Neural Networks in Embedded Systems (2020)](https://doi.org/10.1016/j.micpro.2020.102989) | - |
@@ -435,14 +436,18 @@ Deployment evidence should address transfer across tasks and devices, predictor 
 
 | Paper | Code |
 |---|---|
+| [GB200 NVL72: Powering the New Era of Computing (2025)](https://www.nvidia.com/en-us/data-center/gb200-nvl72/) | - |
 | [AI and Memory Wall (2024)](https://arxiv.org/abs/2403.14123) | - |
+| [AMD Instinct MI300 Series Modular Chiplet Package: HPC and AI Accelerator for Exa-Class Systems (2024)](https://doi.org/10.1109/ISSCC49657.2024.10454441) | - |
+| [An Empirical Study on Low GPU Utilization of Deep Learning Jobs (2024)](https://doi.org/10.1145/3597503.3639232) | - |
+| [NVIDIA Hopper H100 GPU: Scaling Performance (2023)](https://doi.org/10.1109/MM.2023.3256796) | - |
 | [Data Movement Is All You Need: A Case Study on Optimizing Transformers (2021)](https://arxiv.org/abs/2007.00072) | [spcl/substation](https://github.com/spcl/substation) |
 | [The Hardware Lottery (2021)](https://arxiv.org/abs/2009.06489) | - |
 | [Roofline: An Insightful Visual Performance Model for Multicore Architectures (2009)](https://doi.org/10.1145/1498765.1498785) | - |
 
 ## Applications
 
-The lists combine direct EMONAS applications with adjacent NAS evidence. Visual recognition has the broadest evidence; medical segmentation, spiking networks, microcontrollers, and edge accelerators provide further explicit multiobjective examples. Language, speech, federated systems, and industrial sensing include related studies that define tasks or constraints without necessarily satisfying D1. Application accuracy alone does not establish robustness or deployment readiness.
+The lists combine direct EMONAS applications with adjacent NAS evidence. Visual recognition has the broadest evidence; medical segmentation, spiking networks, microcontrollers, and edge accelerators provide further explicit multiobjective examples. Language, speech, federated systems, and industrial sensing include related studies of task settings, search spaces, and deployment constraints. Application accuracy alone does not establish robustness or deployment readiness.
 
 ### Detection, segmentation and image restoration
 
@@ -578,6 +583,23 @@ This group includes evolutionary NAS, adjacent generative NAS, and general progr
 | [Fitness Landscape Analysis of Graph Neural Network Architecture Search Spaces (2021)](https://scholar.google.com/scholar_lookup?title=Fitness%20Landscape%20Analysis%20of%20Graph%20Neural%20Network%20Architecture%20Search%20Spaces) | [mhnnunes/fla_nas_gnn](https://github.com/mhnnunes/fla_nas_gnn) |
 | [ModularNAS: Towards Modularized and Reusable Neural Architecture Search (2021)](https://proceedings.mlsys.org/paper_files/paper/2021/hash/bc19061f88f16e9ed4a18f0bbd47048a-Abstract.html) | [CreeperLin/modnas](https://github.com/CreeperLin/modnas) |
 | [PlatEMO: A MATLAB Platform for Evolutionary Multi-Objective Optimization (2017)](https://doi.org/10.1109/MCI.2017.2742868) | [BIMK/PlatEMO](https://github.com/BIMK/PlatEMO) |
+
+## Supporting Resources
+
+Foundational models, datasets, application background, and review methodology supporting the survey.
+
+| Source | Context |
+|---|---|
+| [Deep Residual Learning for Image Recognition (2016)](https://arxiv.org/abs/1512.03385) | Residual network architectures |
+| [Going Deeper with Convolutions (2015)](https://arxiv.org/abs/1409.4842) | Inception architecture and convolutional design |
+| [Microsoft COCO: Common Objects in Context (2014)](https://arxiv.org/abs/1405.0312) | Object detection and segmentation dataset |
+| [Advanced Fault Diagnosis in Rotary Machines Using Optimized Transfer Learning (2026)](https://doi.org/10.1109/ACCESS.2026.3675976) | Industrial sensing and transfer learning |
+| [PERFECT: Personalized Federated Learning for CBRS Radar Detection (2026)](https://arxiv.org/abs/2605.03199) | Distributed sensing and personalized federated learning |
+| [Trust, Attitudes and Use of Artificial Intelligence: A Global Study 2025 (2025)](https://doi.org/10.26188/28822919) | Trust and adoption of AI |
+| [Exploring the Artificial Intelligence "Trust Paradox": Evidence from a Survey Experiment in the United States (2023)](https://doi.org/10.1371/journal.pone.0288109) | Trust and adoption of AI |
+| [The PRISMA 2020 Statement: An Updated Guideline for Reporting Systematic Reviews (2021)](https://doi.org/10.1136/bmj.n71) | Review reporting methodology |
+| [Guidelines for Snowballing in Systematic Literature Studies and a Replication in Software Engineering (2014)](https://doi.org/10.1145/2601248.2601268) | Reference tracking methodology |
+| EMONAS Review Database: Protocol, Search Log and Screening Records (2026) | Companion review database and protocol, supplied as Online Resources 1 and 2 with the survey |
 
 ## Minimum Reporting Checklist
 
